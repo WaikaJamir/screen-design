@@ -1,0 +1,448 @@
+import React, { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AiOutlineCarryOut } from "react-icons/ai";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import Webcam from "react-webcam";
+
+const videoConstraints = {
+  width: 400,
+  height: 450,
+  facingMode: "user",
+};
+
+function Form(props) {
+  const navigate = useNavigate();
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [users, setUsers] = useState({
+    firstName: "",
+    lastName: "",
+    mothersName: "",
+    fathersName: "",
+    address: "",
+    gender: "",
+    pincode: "",
+    course: "",
+    email: "",
+    dob: null,
+    id:'1',
+    designation: "Developer",
+    organization: "PurpleTalk",
+    checkin:'',
+    url:''
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const currentTime = new Date().toLocaleTimeString("en-in", {
+      hour: "numeric",
+      hour12: true,
+      minute: "numeric",
+    });
+    navigate("/usersdata", { state: { users:{...users, checkin:currentTime,url:props.url}} ,replace:true});
+    //passing state props in navigate link
+    console.log(users);
+
+   
+  };
+
+  const inputChange = (e) => {
+    setUsers((prevUsers) => ({
+      ...prevUsers,
+      [e.target.name]: e.target.value.trim(),
+    }));
+    // console.log(users);
+  };
+
+  const resetButton = (e) => {
+    e.preventDefault();
+    setUsers({
+      firstName: "",
+      lastName: "",
+      mothersName: "",
+      fathersName: "",
+      address: "",
+      gender: "",
+      pincode: "",
+      course: "",
+      email: "",
+      city: "",
+      state: "",
+      // dob: null,
+    });
+    console.log("fghj");
+    setSelectedDate(null);
+    // setUsers(dob.null)
+  };
+
+  const dates = new Date().toISOString().split("T")[0];
+  // console.log(dates);
+  // const datee = new Date(new Date().getFullYear(), new Date().getMonth());
+  // const datee = new Date().toISOString().split("T")[0];
+  // console.log(datee);
+
+  const datePickerRef = useRef(null);
+  const datePickerIcon = () => {
+    const datePicker = datePickerRef.current;
+    datePicker.setFocus(true);
+  };
+
+  return (
+    <>
+      <section
+        className="backgroundColor"
+        // style={{ height: "100%", overflow: " hidden" }}
+      >
+        <div style={{ height: "61.2em", overflow: " hidden" }}>
+          <div className="container py-5 h-100">
+            <div className="  row d-flex justify-content-center align-items-center h-100">
+              <div className="col">
+                <div style={{ height: "54rem" }}>
+                  <div className="card  h-100">
+                    <div className="row g-0">
+                      <div className="col-xl-6 d-none d-xl-block">
+                        {props.isCaptureEnable || (
+                          <button
+                            type="button"
+                            onClick={props.openButton}
+                            style={{
+                              borderWidth: 1,
+                              borderColor: "black",
+                              marginBottom: "0rem",
+                              marginTop: "49rem",
+                              marginLeft: "14.9rem",
+                              marginRight: "14.9rem",
+                            }}
+                            className="btn btn btn-lg "
+                          >
+                            Capture Image
+                          </button>
+                        )}
+
+                        {props.isCaptureEnable && (
+                          <>
+                            <div>
+                              <button
+                                className="cimage"
+                                onClick={props.closeButton}
+                              >
+                                X
+                              </button>
+                            </div>
+                            <div
+                              style={{
+                                marginLeft: "1rem",
+                                marginRight: "1rem",
+                                marginBottom: "7rem",
+                                marginTop: "7rem",
+                                border: "10px",
+                                borderRadius: "20px",
+                              }}
+                            >
+                              <Webcam
+                                audio={false}
+                                // 540
+                                width={635}
+                                //300
+                                height={635}
+                                ref={props.webcamRef}
+                                screenshotFormat="image/jpeg"
+                                videoConstraints={videoConstraints}
+                              />
+                            </div>
+                            <button
+                              // style={{
+                              // borderWidth: 1,
+                              // borderColor: "black",
+                              //   marginBottom: "20rem ",
+                              //   marginTop: "rem",
+                              //   marginLeft: "14.9rem",
+                              //   marginRight: "14.9rem",
+                              // }}
+                              onClick={props.capture}
+                              className="hide"
+                            >
+                              Capture Image
+                            </button>
+                          </>
+                        )}
+
+                        {/* {props.url && (
+                      <>
+                        <br />
+                        <br />
+                        <div>
+                          <button
+                            onClick={props.clearButton}
+                            className="btn btn-light"
+                          >
+                            Clear
+                          </button>
+                        </div>
+                        <div>
+                          <img src={props.url} alt="Screenshot" />
+                        </div>
+                      </>
+                    )} */}
+                      </div>
+                      <div className="col-xl-6">
+                        <div
+                          style={{ marginRight: "10%" }}
+                          className="card-body p-md-2 text-black "
+                        >
+                          <h3
+                            className="mb-3 text-uppercase"
+                            style={{ marginLeft: "25%", paddingTop: "15px" }}
+                          >
+                            Check In Form
+                          </h3>
+                          <form onSubmit={handleSubmit}>
+                            <div className="row">
+                              <div className="col-md-6 mb-3">
+                                <div className="form-outline">
+                                  <label className="form-label">
+                                    First name
+                                  </label>
+                                  <input
+                                    onChange={inputChange}
+                                    name="firstName"
+                                    value={users.firstName}
+                                    minLength="2"
+                                    type="text"
+                                    className="form-control form-control-lg"
+                                    required
+                                  />
+                                </div>
+                              </div>
+                              <div className="col-md-6 mb-3">
+                                <div className="form-outline">
+                                  <label className="form-label">
+                                    Last name
+                                  </label>
+                                  <input
+                                    onChange={inputChange}
+                                    name="lastName"
+                                    type="text"
+                                    minLength="2"
+                                    value={users.lastName}
+                                    className="form-control form-control-lg"
+                                    required
+                                  />
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="row">
+                              <div className="col-md-6 mb-3">
+                                <div className="form-outline">
+                                  <label className="form-label">
+                                    Mother's name
+                                  </label>
+                                  <input
+                                    onChange={inputChange}
+                                    name="mothersName"
+                                    minLength="2"
+                                    value={users.mothersName}
+                                    type="text"
+                                    className="form-control form-control-lg"
+                                    required
+                                  />
+                                </div>
+                              </div>
+                              <div className="col-md-6 mb-3">
+                                <div className="form-outline">
+                                  <label className="form-label">
+                                    Father's name
+                                  </label>
+                                  <input
+                                    onChange={inputChange}
+                                    name="fathersName"
+                                    minLength="2"
+                                    value={users.fathersName}
+                                    type="text"
+                                    className="form-control form-control-lg"
+                                    required
+                                  />
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="form-outline mb-3">
+                              <label className="form-label">Address </label>
+                              <input
+                                onChange={inputChange}
+                                name="address"
+                                minLength="2"
+                                value={users.address}
+                                type="text"
+                                className="form-control form-control-lg"
+                                required
+                              />
+                            </div>
+
+                            <div className="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                              <h6 className="mb-0 me-4">Gender: </h6>
+
+                              <div className="form-check form-check-inline mb-0 me-4">
+                                <input
+                                  onChange={inputChange}
+                                  className="form-check-input"
+                                  name="gender"
+                                  type="radio"
+                                  checked={users.gender === "male"}
+                                  value="male"
+                                  required
+                                />
+                                <label className="form-check-label">Male</label>
+                              </div>
+
+                              <div className="form-check form-check-inline mb-0 me-4">
+                                <input
+                                  onChange={inputChange}
+                                  className="form-check-input"
+                                  type="radio"
+                                  name="gender"
+                                  checked={users.gender === "female"}
+                                  value="female"
+                                  required
+                                />
+                                <label className="form-check-label">
+                                  Female
+                                </label>
+                              </div>
+
+                              <div className="form-check form-check-inline mb-0">
+                                <input
+                                  onChange={inputChange}
+                                  className="form-check-input"
+                                  type="radio"
+                                  name="gender"
+                                  checked={users.gender === "other"}
+                                  value="other"
+                                  required
+                                />
+                                <label className="form-check-label">
+                                  Other
+                                </label>
+                              </div>
+                            </div>
+
+                            <div className="row">
+                              <div className="col-md-6 mb-3">
+                                <select
+                                  className="form-control form-control-lg"
+                                  onChange={inputChange}
+                                  name="state"
+                                  value={users.state}
+                                  required
+                                >
+                                  <option value="">state</option>
+                                  <option value="2">Option 1</option>
+                                  <option value="3">Option 2</option>
+                                  <option value="4">Option 3</option>
+                                </select>
+                              </div>
+                              <div className="col-md-6 mb-3">
+                                <select
+                                  className="form-control form-control-lg"
+                                  onChange={inputChange}
+                                  name="city"
+                                  value={users.city}
+                                  required
+                                >
+                                  <option value="">city</option>
+                                  <option value="Option 1">Option 1</option>
+                                  <option value="Option 2">Option 2</option>
+                                  <option value="Option 3">Option 3</option>
+                                </select>
+                              </div>
+                            </div>
+
+                            <div className="form-outline mb-3">
+                              <label className="form-labe">DOB</label>
+                              {/* <input
+                                onChange={inputChange}
+                                name="DOB"
+                                max={dates}
+                                value={users.null}
+                                type="date"
+                                className="form-control form-control-lg"
+                                required
+                              /> */}
+                              <div
+                                className="calender-icon"
+                                onClick={() => datePickerIcon()}
+                              >
+                                <AiOutlineCarryOut />
+                              </div>
+                              <DatePicker
+                                ref={datePickerRef}
+                                selected={selectedDate}
+                                onChange={(date) => setSelectedDate(date)}
+                                dateFormat="dd/MM/yyyy"
+                                maxDate={new Date()}
+                                className="form-control form-control-lg"
+                                required
+                              ></DatePicker>
+                            </div>
+
+                            <div className="form-outline mb-3">
+                              <label className="form-label"> Pincode </label>
+                              <input
+                                onChange={inputChange}
+                                type="number"
+                                className="form-control form-control-lg"
+                                name="pincode"
+                                value={users.pincode}
+                                required
+                              />
+                            </div>
+
+                            <div className="form-outline mb-3">
+                              <label className="form-label">Email ID </label>
+                              <input
+                                onChange={inputChange}
+                                name="email"
+                                type="email"
+                                value={users.email}
+                                className="form-control form-control-lg"
+                                required
+                              />
+                            </div>
+                            <div className="d-flex justify-content-end pt-3">
+                              <button
+                                onClick={() => navigate("/checkintable")}
+                                className="hiddenButton"
+                              >
+                                List Button
+                              </button>
+                              <button
+                                onClick={resetButton}
+                                className="btn btn-light btn-lg"
+                              >
+                                Reset All
+                              </button>
+
+                              <button
+                                type="submit"
+                                className="btn btn-outline-dark btn-lg ms-3"
+                              >
+                                Submit form
+                              </button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+export default Form;

@@ -1,0 +1,58 @@
+const users = [
+  {
+    id: 11,
+    name: "John",
+    checkIn: "",
+    checkOut: "",
+    designation: "Developer",
+    organization: "PurpleTalk",
+    isButtonClicked: false,
+  },
+  {
+    id: 33,
+    name: "Mark",
+    checkIn: "",
+    checkOut: "",
+    designation: "Designer",
+    organization: "Xcubelabs",
+    isButtonClicked: false,
+  },
+  {
+    id: 14,
+    name: "Neil",
+    checkIn: "",
+    checkOut: "",
+    designation: "Developer",
+    organization: "PurpleTalk",
+    isButtonClicked: false,
+  },
+  {
+    id: 7,
+    name: "Cath",
+    checkIn: "",
+    checkOut: "",
+    designation: " Gamer",
+    organization: "Yesgnome",
+    isButtonClicked: false,
+  },
+  {
+    id: 9,
+    name: "Abcd",
+    checkIn: "",
+    checkOut: "",
+    designation: "Developer",
+    organization: "Yesgnome",
+    isButtonClicked: false,
+  },
+
+  {
+    id: 8,
+    name: "ZXCVB",
+    checkIn: "",
+    checkOut: "",
+    designation: "Finance",
+    organization: "PurpleTalk",
+    isButtonClicked: false,
+  },
+];
+export default users;

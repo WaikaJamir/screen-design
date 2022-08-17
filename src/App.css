@@ -2,6 +2,82 @@
   text-align: center;
 }
 
+.backgroundColor {
+  /* background: linear-gradient(#f64f59, #c471ed, #12c2e9) */
+  background-color: #553e96bf;
+  /* color: #0545f3a4; */
+}
+.hiddenButton {
+  margin-right: 20%;
+  background: transparent;
+  border: none !important;
+  font-size: 0;
+}
+
+.cimage {
+  color: rgb(226, 211, 211);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-left: 28rem;
+  margin-top: 6rem;
+  position: absolute;
+  z-index: 1;
+  background-color: transparent;
+  border: none;
+}
+#tableCSS {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#tableCSS td,
+#tableCSS th {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+#tableCSS tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#tableCSS tr:hover {
+  background-color: #f2f2f2;
+}
+
+#tableCSS th {
+  padding-top: 13px;
+  padding-bottom: 13px;
+  text-align: center;
+  background-color: #ddd;
+  color: black;
+}
+#tableCSS td {
+  text-align: center;
+}
+.calender-icon {
+  font-size: 27px;
+  float: right;
+  margin-left: 33rem;
+  position: absolute;
+  z-index: 3;
+}
+/* usersData */
+.cards {
+  margin-left: 26rem;
+  margin-top: 5rem;
+  padding: 15px;
+  width: 40rem;
+  height: 25rem;
+  /* borderColor: "black", */
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px 15px #6a53aabf;
+  font-size: 25px;
+}
+.cards p {
+  text-align: right;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -12,7 +88,11 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+.hide {
+  background: transparent;
+  border: none !important;
+  font-size: 0;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
